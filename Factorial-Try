@@ -1,0 +1,23 @@
+import kotlin.random.Random
+import java.math.BigInteger
+
+fun main(args: Array<String>) {
+    val num1 = Random.nextInt(1, 100)
+    val num2 = Random.nextInt(1, 100)
+    val test = 30
+
+    factorial(test)
+    factorial(num1)
+    factorial(num2)
+
+}
+
+fun factorial(num: Int) {
+    var ans = BigInteger.ONE
+    for (i in 1..num) {
+        // factorial = factorial * i;
+        ans  = ans.times(BigInteger.valueOf(i.toLong()))
+    }
+    println("The factorial of $num is: $ans")
+}
+
