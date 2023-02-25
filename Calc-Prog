@@ -14,11 +14,12 @@ fun main() {
             println("Invalid Equation. Expected: value + value. Received: $input")
         } else {
             val operator: String = values[1]
+            var ans: Double = 0.0
             val x = values[0].toDoubleOrNull() ?: throw IllegalArgumentException("Invalid input: ${values[0]} is not a number")
 
             if(values.size == 2) {
                 val op = Operations(x)
-                when (operator) {
+                ans = when (operator) {
                     "#" -> op.sqrt()
                     "%%" -> op.toPercent()
                     "!" -> op.fact()
@@ -27,11 +28,12 @@ fun main() {
                     "tan" -> op.trigo(operator)
                     else -> throw IllegalArgumentException("An unknown operator is input: $operator")
                 }
+                print("$ans ")
             }
             else {
                 val y = values[2].toDoubleOrNull() ?: throw IllegalArgumentException("Invalid input: ${values[2]} is not a number")
                 val op = Operations(x, y)
-                when (operator) {
+                ans = when (operator) {
                     "+" -> op.add()
                     "-" -> op.sub()
                     "*" -> op.mul()
@@ -41,7 +43,9 @@ fun main() {
                     "%%" -> op.percentOf()
                     else -> throw IllegalArgumentException("An unknown operator is input: $operator")
                 }
+                print("$ans ")
             }
+
         }
         input = readLine()
     }
@@ -59,89 +63,71 @@ class Operations {
         x = a
     }
 
-    
-    fun add() {
+
+    fun add(): Double {
         val z = x + y
-        println("Sum: $z")
+        return z
     }
 
-    fun sub() {
+    fun sub(): Double {
         val z = x - y
-        println("Difference: $z")
+        return z
     }
 
-    fun mul() {
+    fun mul(): Double {
         val z = x * y
-        println("Product: $z")
+        return z
     }
 
-    fun div() {
+    fun div(): Double {
         val z = x / y
-        println("Quotient: $z")
+        return z
     }
 
-    fun mod() {
+    fun mod(): Double {
         val z = x % y
-        println("Remainder: $z")
+        return z
     }
 
-    fun expo() {
+    fun expo(): Double {
         val z = x.pow(y)
-        println("Answer: $z")
+        return z
     }
 
-    fun percentOf() {
+    fun percentOf(): Double {
         val z = x * (y/100)
-        println("$y% of $x is: $z")
+        return z
     }
 
-    fun sqrt() {
+    fun sqrt(): Double {
         val z = sqrt(x)
-        println("The square root of $x is: $z")
+        return z
     }
 
-    fun toPercent() {
+    fun toPercent(): Double {
         val z = x / 100
-        println("$x to Percent: $z")
+        return z
     }
 
-    fun fact(){
+    fun fact(): Double {
         var z: Double = 1.0
         for(i in 1..x.toInt()) {
             z *= i
         }
-        println("$x factorial: $z")
+        return z
     }
 
-    fun sin() {
-        val z = kotlin.math.sin(x)
-        println("The sine of $x is: $z")
-    }
-
-    /*fun cos() {
-        val z = kotlin.math.cos(x)
-        println("The cosine of $x is: $z")
-    }
-
-    fun tan() {
-        val z = kotlin.math.tan(x)
-        println("The tangent of $x is: $z")
-    }
-    */
-
-    fun trigo(op: String) {
+    fun trigo(op: String): Double {
+        var z = 0.0
         if(op == "sin") {
-            val z = kotlin.math.sin(x)
-            println("The sine of $x is: $z")
+            z = kotlin.math.sin(x)
         }
         else if (op == "cos") {
-            val z = kotlin.math.cos(x)
-            println("The cosine of $x is: $z")
+            z = kotlin.math.cos(x)
         }
         else if (op == "tan") {
-            val z = kotlin.math.tan(x)
-            println("The tangent of $x is: $z")
+            z = kotlin.math.tan(x)
         }
+        return z
     }
 }
-
