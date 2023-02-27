@@ -34,16 +34,16 @@ fun main() {
                 val y = values[2].toDoubleOrNull() ?: throw IllegalArgumentException("Invalid input: ${values[2]} is not a number")
                 val op = Operations(x, y)
                 ans = when (operator) {
-                    "+" -> op.add()
-                    "-" -> op.sub()
-                    "*" -> op.mul()
-                    "/" -> op.div()
-                    "%" -> op.mod()
+                    "+" -> op.arith(operator)
+                    "-" -> op.arith(operator)
+                    "*" -> op.arith(operator)
+                    "/" -> op.arith(operator)
+                    "%" -> op.arith(operator)
                     "^" -> op.expo()
                     "%%" -> op.percentOf()
                     else -> throw IllegalArgumentException("An unknown operator is input: $operator")
                 }
-                print("$ans ")
+                println("$ans ")
             }
 
         }
@@ -63,29 +63,20 @@ class Operations {
         x = a
     }
 
-
-    fun add(): Double {
-        val z = x + y
-        return z
-    }
-
-    fun sub(): Double {
-        val z = x - y
-        return z
-    }
-
-    fun mul(): Double {
-        val z = x * y
-        return z
-    }
-
-    fun div(): Double {
-        val z = x / y
-        return z
-    }
-
-    fun mod(): Double {
-        val z = x % y
+    fun arith(op: String): Double {
+        var z =  0.0
+        if (op == "/" && y == 0.0) {
+            println("Division by Zero is: Undefined ")
+        } else {
+            z = when (op) {
+                "+" -> x + y
+                "-" -> x - y
+                "*" -> x * y
+                "/" -> x / y
+                "%" -> x % y
+                else -> throw IllegalArgumentException("Incorrect arithmetic operation!")
+            }
+        }
         return z
     }
 
